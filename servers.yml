@@ -58,13 +58,14 @@ Resources:
     Properties:
       UserData:
         Fn::Base64: !Sub |
-          #  !/bin/bash
+          #!/bin/bash
           apt-get update -y
           apt-get install apache2 -y
           cd /var/www/html
           echo "Udacity Demo Web Server Up and Running!" > index.html
           systemctl start apache2.service
       ImageId: ami-0a634ae95e11c6f91
+      IamInstanceProfile: !Ref ProfileWithRolesForOurApp
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: t3.small
